@@ -43,6 +43,29 @@ app.get('/', (req, res) => {
         });
 });
 
+app.post('/:hsid', (req, res) => {
+    HS.findByIdAndUpdate(req.params.hsid, {
+        score: req.body.score
+    }, { new: true })
+        .then(hss => {
+            if (!hss) {
+                return res.status(404).send({
+                    message: "Score not found with id " + req.params.hsid
+                });
+            }
+            res.send(hs);
+        }).catch(err => {
+            if (err.kind === 'ObjectId') {
+                return res.status(404).send({
+                    message: "score not found with id " + req.params.hsid
+                });
+            }
+            return res.status(500).send({
+                message: "Error updating score with id " + req.params.hsid
+            });
+        });
+})
+
 // listen for requests
 app.listen(process.env.PORT || 5000, () => {
     console.log(`Server is listening on port ${process.env.PORT}`);
