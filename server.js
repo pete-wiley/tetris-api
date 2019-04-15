@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const HS = require('./highScore.model.js')
+const cors = require('cors')
 
 // create express app
 const app = express();
@@ -10,6 +11,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json())
+
+app.use(cors())
 
 // Configuring the database
 const dbConfig = require('./dbconfig');
