@@ -47,8 +47,8 @@ app.post('/:hsid', (req, res) => {
     HS.findByIdAndUpdate(req.params.hsid, {
         score: req.body.score
     }, { new: true })
-        .then(hss => {
-            if (!hss) {
+        .then(hs => {
+            if (!hs) {
                 return res.status(404).send({
                     message: "Score not found with id " + req.params.hsid
                 });
