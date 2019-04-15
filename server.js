@@ -43,7 +43,7 @@ app.get('/', (req, res) => {
         });
 });
 
-app.post('/:hsid', (req, res) => {
+app.put('/:hsid', (req, res) => {
     HS.findByIdAndUpdate(req.params.hsid, {
         score: req.body.score
     }, { new: true })
